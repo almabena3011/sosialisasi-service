@@ -6,7 +6,7 @@ const { getUserById } = require('../userService');
 module.exports = async (req, res) => {
 
     const { id } = req.params
-    const { userId } = req.body
+    const { userId } = req.query
     try {
         const pengumuman = await Pengumuman.findByPk(id);
         if (!pengumuman) {
