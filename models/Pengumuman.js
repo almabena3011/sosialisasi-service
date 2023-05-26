@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
+const moment = require('moment');
 
 module.exports = (sequelize) => {
     class Pengumuman extends Model {
@@ -33,6 +34,20 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            createdAt: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                get() {
+                    return moment(this.getDataValue('createdAt')).format('YY-MM-DD');
+                }
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                get() {
+                    return moment(this.getDataValue('updatedAt')).format('YY-MM-DD');
+                }
+            },
         },
         {
             sequelize,
@@ -44,5 +59,7 @@ module.exports = (sequelize) => {
 
     return Pengumuman;
 };
+
+
 
 
