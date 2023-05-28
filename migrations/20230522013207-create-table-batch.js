@@ -14,11 +14,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      nama_program: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      prodiId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
-      program_studi: {
+      nama_program: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -34,6 +34,20 @@ module.exports = {
         type: Sequelize.ENUM,
         values: ['genap', 'ganjil'],
         allowNull: true,
+      },
+      isFinished: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+      },
+      startDate: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: new Date()
+      },
+      endDate: {
+        type: Sequelize.DATE,
+        allowNull: true
       },
       createdAt: {
         type: Sequelize.DATE,
