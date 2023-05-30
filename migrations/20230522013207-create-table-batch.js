@@ -10,7 +10,7 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
-      koordinatorId: {
+      dosenId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -35,10 +35,14 @@ module.exports = {
         values: ['genap', 'ganjil'],
         allowNull: true,
       },
+      ipk_minimum: {
+        type: Sequelize.DECIMAL(3, 2),
+        allowNull: false,
+      },
       isFinished: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: true
+        defaultValue: false
       },
       startDate: {
         type: Sequelize.DATE,
@@ -47,6 +51,10 @@ module.exports = {
       },
       endDate: {
         type: Sequelize.DATE,
+        allowNull: true
+      },
+      proposal_path: {
+        type: Sequelize.STRING,
         allowNull: true
       },
       createdAt: {

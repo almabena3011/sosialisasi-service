@@ -1,11 +1,12 @@
-// var express = require('express');
-// var router = express.Router();
+var express = require('express');
+var router = express.Router();
 
-// const batchHandler = require('./handler/batch');
+const batchHandler = require('./handler/batch');
 
-// router.post('/', batchHandler.createBatch);
-// router.get('/', batchHandler.getAllbatch);
-// router.get('/:id', batchHandler.getBatch);
-// // router.delete('/:id', batchHandler.removebatch);
+router.get('/:userId/userbatch', batchHandler.getBatchesByAuthId);
+router.post('/', batchHandler.createBatch);
+router.get('/', batchHandler.getAllBatch);
+router.get('/:id', batchHandler.getBatch);
 
-// module.exports = router;
+
+module.exports = router;
