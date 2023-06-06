@@ -22,7 +22,7 @@ async function getUserById(id) {
 
 async function getDosenByAuthId(userId) {
     try {
-        const response = await axios.get(`${URL_SERVICE_USER}/dosen/${userId}`);
+        const response = await axios.get(`${URL_SERVICE_USER}/dosen/${userId}/dosenaskoor`);
         if (!response.data) {
             throw new Error('Dosen not found');
         }

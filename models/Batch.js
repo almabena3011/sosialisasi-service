@@ -27,10 +27,6 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            gelombang: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
             tahun_ajaran: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

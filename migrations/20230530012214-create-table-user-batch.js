@@ -29,6 +29,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_batch');
+    await queryInterface.dropTable('user_bacth');
   }
 };
