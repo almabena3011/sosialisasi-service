@@ -23,7 +23,7 @@ module.exports = {
         allowNull: false,
       },
       tahun_ajaran: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       semester: {
@@ -47,10 +47,6 @@ module.exports = {
       },
       endDate: {
         type: Sequelize.DATE,
-        allowNull: true
-      },
-      proposal_path: {
-        type: Sequelize.STRING,
         allowNull: true
       },
       createdAt: {

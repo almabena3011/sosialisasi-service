@@ -7,43 +7,29 @@ const { getDosenByAuthId, getUserIdsByAuthProdi } = require('../userService');
 const schema = {
     userId: { type: "number", integer: true, empty: false },
     nama_program: { type: "string", empty: false },
-    tahun_ajaran: { type: "number", empty: false },
+    tahun_ajaran: { type: "string", empty: false },
     semester: { type: "enum", values: ['ganjil', 'genap'], empty: true },
-    ipk_minimum: {
-        type: "custom",
-        empty: false,
-        check: value => {
-            if (typeof value !== 'string' || isNaN(Number(value))) {
-                return ["ipk_minimum harus berupa angka dalam format string"];
-            }
-
-            const valueParts = value.split('.');
-
-            // Menyertakan skala 1 sebelum koma dan 1 atau 2 di belakang koma
-            if (valueParts[0].length > 1 || (valueParts[1] && valueParts[1].length > 2)) {
-                return ["ipk_minimum harus memiliki skala 1 sebelum koma dan 1 atau 2 di belakang koma"];
-            }
-
-            return true;
-        }
-    }
+    ipk_minimum: { empty: false, type: "number", positive: true, min: 0, max: 4.00, fixed: 2 }
 };
 
-
+const validate = new Validator().compile(schema);
 
 module.exports = async (req, res) => {
-    const validate = v.validate(req.body, schema);
-    if (validate.length) {
-        return res.status(400).json({
-            status: 'error',
-            message: validate
-        });
-    }
     req.body.ipk_minimum = parseFloat(req.body.ipk_minimum);
+
+    const validationResult = validate(req.body);
+
+    if (Array.isArray(validationResult)) {
+        return res.status(400).json({ errors: validationResult });
+    }
+
+
     const { userId, nama_program, tahun_ajaran, semester, ipk_minimum } = req.body
     try {
         let batch;
         const dosen = await getDosenByAuthId(userId);
+
+
         batch = await Batch.findOne({
             where: {
                 prodiId: dosen.prodiId,
@@ -55,7 +41,7 @@ module.exports = async (req, res) => {
         if (batch) {
             return res.status(409).json({
                 status: 'error',
-                message: 'batch sudah dibuat sebelumnya'
+                message: 'Batch sudah dibuat sebelumnya'
             })
         }
         batch = await Batch.create({
@@ -73,7 +59,7 @@ module.exports = async (req, res) => {
         for (let id of userIds) {
             await UserBatch.create({ batchId: batch.id, userId: id });
         }
-        res.status(201).json({
+        return res.status(201).json({
             status: 'success',
             data: batch
         });
