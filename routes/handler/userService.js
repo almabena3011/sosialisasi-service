@@ -56,4 +56,21 @@ async function getUserIdsByAuthProdi(prodiId) {
     }
 }
 
-module.exports = { getUserById, getDosenByAuthId, getUserIdsByAuthProdi };
+async function getAllDosenByProdiBatchId(prodiId) {
+    try {
+        const response = await axios.get(`${URL_SERVICE_USER}/dosen/${prodiId}/dosenprodi`);
+        if (!response.data) {
+            throw new Error('Dosens not found');
+        }
+        return response.data.data;
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+            throw new Error(error.response.data.error);
+        } else if (error.response && error.response.status === 404) {
+            throw new Error('Dosens not found');
+        } else {
+            throw new Error('User service is not available');
+        }
+    }
+}
+module.exports = { getUserById, getDosenByAuthId, getUserIdsByAuthProdi, getAllDosenByProdiBatchId };
