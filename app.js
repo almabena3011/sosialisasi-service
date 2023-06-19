@@ -19,6 +19,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
 app.use('/pengumuman', pengumumanRouter);
 app.use('/batch', batchRouter);
+
+
 module.exports = app;
