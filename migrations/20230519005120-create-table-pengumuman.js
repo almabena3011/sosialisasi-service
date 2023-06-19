@@ -24,7 +24,7 @@ module.exports = {
       },
       kategori: {
         type: Sequelize.ENUM,
-        values: ['S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAAK'],
+        values: ['S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAA'],
         allowNull: true,
       },
       createdBy: {

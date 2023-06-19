@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
                 allowNull: false,
             },
             kategori: {
-                type: DataTypes.ENUM('S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAAK'),
+                type: DataTypes.ENUM('S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAA'),
                 allowNull: true,
             },
             createdBy: {

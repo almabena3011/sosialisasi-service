@@ -8,12 +8,13 @@ const schema = {
     userId: { type: "number", integer: true, empty: false },
     judul: { type: "string", empty: false },
     deskripsi: { type: "string", empty: false },
-    kategori: { type: "enum", values: ['S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAAK'], empty: true }
+    kategori: { type: "enum", values: ['S1 Informatika', 'S1 Sistem Informasi', 'S1 Teknik Elektro', 'BAA'] }
 };
 
 module.exports = async (req, res) => {
     const validate = v.validate(req.body, schema);
     if (validate.length) {
+        console.log(validate);
         return res.status(400).json({
             status: 'error',
             message: validate
